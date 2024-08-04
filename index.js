@@ -67,16 +67,17 @@ showCard();
 const addForm = document.querySelector(".add");
 addForm.addEventListener("submit", (event) => {
   event.preventDefault();
-
-  addDoc(colRef, {
-    link: addForm.link.value,
-    title: addForm.title.value,
-    category: addForm.category.value,
-    createdAt: serverTimestamp(),
-  }).then(() => {
-    addForm.reset();
-    showCard();
-  });
+    if (addForm.link.value.trim() != "" && addForm.title.value.trim() != "") {
+      addDoc(colRef, {
+        link: addForm.link.value.trim(),
+        title: addForm.title.value.trim(),
+        category: addForm.category.value,
+        createdAt: serverTimestamp(),
+      }).then(() => {
+        addForm.reset();
+        showCard();
+      });
+    }
 });
 
 function deleteEvent() {
